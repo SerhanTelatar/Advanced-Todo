@@ -1,0 +1,92 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<h1 style="display: flex; justify-content: center;align-items: center">Todo App</h1>
+<form action="/todo" method="POST">
+    <div style="display: flex; justify-content: center; height: 300px; align-items: center">
+        <label for="text" style="font-size:25px"></label>
+        <input type="text" style="width: 1000px; height: 40px;" id="text" name="text" required placeholder="Enter here...">
+        <button type="submit" style="height: 40px;width: 200px; background-color:brown;display: flex; justify-content: center;align-items: center" id="click">
+            <a href="/todo" style="text-decoration: none; color:azure;font-size: 18px;">ADD</a>
+        </button>
+    </div>    
+</form>
+<form action="/todo" method="post">
+    <div class="container">
+        <h2>Tasks</h2>
+        <ul class="list-group my-5">
+            <% texts.forEach((text)=>{ %>
+                <% if(!text.completed){ %>
+                    <li class="list-group-item">
+                        <h3>
+                            <%= text.text %>
+                            <div style="display: flex; justify-content: right; text-align: start;">
+                                <button style="height: 50px; width: 70px; background-color: green; border-radius: 5px;" type="button">
+                                    <a href="/todo/finishedTask/<%= text._id %>" style="color: white; text-decoration: none;">
+                                        <i class="fa fa-check" style="display: flex; justify-content: center; align-items: center;"></i>
+                                    </a> 
+                                </button>
+                                <button style="height: 50px; width: 70px; background-color: red; margin-left: 30px; border-radius: 5px; position: relative;" type="button">
+                                    <a href="/todo/delete/<%= text._id %>" style="color: white; text-decoration: none;">
+                                        <i class="fa fa-trash" style="display: flex; justify-content: center; align-items: center;"></i>
+                                    </a>  
+                                </button>
+                            </div>
+                        </h3>
+                    </li>
+                <% } %> 
+            <% }) %>
+        </ul>
+    </div>
+</form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <form action="/todo" method="post">
+        <div class="container">
+            <h2>Completed Tasks</h2>
+            <ul class="list-group my-5">
+                <% texts.forEach((text)=>{ %>
+                    <% if(text.completed){ %>
+                        <li class="list-group-item">
+                            <h3>
+                                <%= text.text %>
+                                <div style="display: flex; justify-content: right; text-align: start;">
+                                    <button style="height: 50px; width: 70px; background-color: blue; border-radius: 5px;" type="button">
+                                        <a href="/todo/getBackTask/<%= text._id %>" style="color: white; text-decoration: none;">
+                                            <i class="fa fa-repeat" style="display: flex; justify-content: center; align-items: center;"></i>
+                                        </a> 
+                                    </button>
+                                    <button style="height: 50px; width: 70px; background-color: red; margin-left: 30px; border-radius: 5px; position: relative;" type="button">
+                                        <a href="/todo/delete/<%= text._id %>" style="color: white; text-decoration: none;">
+                                            <i class="fa fa-trash" style="display: flex; justify-content: center; align-items: center;"></i>
+                                        </a>  
+                                    </button>
+                                </div>
+                            </h3>
+                        </li>
+                    <% } %> 
+                <% }) %>
+            </ul>
+        </div>
+    </form>
+    
+<script>
+    var button = document.getElementById("click");
+
+    button.addEventListener("click", (event)=> {
+    
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("click").click();
+    }
+    });
+</script>

@@ -13,5 +13,5 @@ app.use(express.json())
 app.use("/todo", textRouter)
 
 app.listen(port, () =>{
-    console.log(`Server provider servise listening at ${port}`)
+    console.log(`Server provider service listening at ${port}`)
 })
